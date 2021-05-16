@@ -1,27 +1,26 @@
 package ru.netology
 
-
 fun main() {
 
-    val price = 100 // цена
-    val discount = 100 // начальная скидка
-    val discount5 = 1.05 // 5% скидка
-    val startDiscount = 1000 // начальная сумма покупок для скидки
-    val otherDiscount = 10000 // сумма покупок для скидки 5%
-    val count = 101 // количество покупок
-
-    val totalPrice = price * count
-
-    val result = when {
-        (totalPrice >= startDiscount) && (totalPrice < otherDiscount) -> totalPrice - discount
-        totalPrice > otherDiscount -> totalPrice / discount5
-        else -> totalPrice
-    }
-
-    println(
-        "Заказ на сумму от 1000-10000 руб. - скидка $discount" + " руб.," +
-                " от 10001 руб. и выше - скадка 5%.\nВаш заказ на сумму: $totalPrice" + " руб." +
-                "\nИтоговая цена, к оплате: $result" + " руб."
-    )
-
+    val result = calc(1000.00, 10500.00, "meloman")
+    println("сумма к оплате: $result")
 }
+
+fun calc(totalProd: Double, historyProd: Double, status: String = "normal"): Double {
+    var totalCalc = 0.00
+    when {
+        historyProd >= 1001.00 && historyProd < 10000.00 -> totalCalc = totalProd - 100.00
+        historyProd >= 10001.00 -> totalCalc = totalProd / 1.05
+        historyProd < 1000.00 -> totalCalc = totalProd
+    }
+    when (status){
+        "meloman" -> totalCalc /= 1.05
+    }
+    return totalCalc
+}
+
+
+
+
+
+
